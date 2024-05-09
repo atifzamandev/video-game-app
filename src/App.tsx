@@ -3,9 +3,18 @@ import { useState } from "react";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import NavBar from "./components/NavBar";
+import PlatformSelector from "./components/PlatformSelector";
 import { Genre } from "./hooks/useGenres";
+import { Platform } from "./hooks/usePlatform";
+
+export interface GameSearchParams {
+  genre: Genre | null;
+  platform: Platform | null;
+}
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [gameSearchParams, setGameSearchParams] = useState<GameSearchParams>(
+    {} as GameSearchParams
+  );
 
   return (
     <Grid
@@ -21,13 +30,21 @@ function App() {
       <Show above='lg'>
         <GridItem area={"aside"} paddingX='0.5rem'>
           <GenreList
-            selectedGenre={selectedGenre}
-            onSelectGenre={(genre) => setSelectedGenre(genre)}
+            selectedGenre={gameSearchParams.genre}
+            onSelectGenre={(genre) =>
+              setGameSearchParams({ ...gameSearchParams, genre })
+            }
           />
         </GridItem>
       </Show>
       <GridItem area={"main"}>
-        <GameGrid selectedGenre={selectedGenre} />
+        <PlatformSelector
+          selectedPlatform={gameSearchParams.platform}
+          onSelectPlatfrom={(platform) =>
+            setGameSearchParams({ ...gameSearchParams, platform })
+          }
+        />
+        <GameGrid gameSearchParams={gameSearchParams} />
       </GridItem>
     </Grid>
   );
