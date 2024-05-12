@@ -1,15 +1,17 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem, Show } from "@chakra-ui/react";
 import { useState } from "react";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import NavBar from "./components/NavBar";
 import PlatformSelector from "./components/PlatformSelector";
+import SortSelector from "./components/SortSelector";
 import { Genre } from "./hooks/useGenres";
 import { Platform } from "./hooks/usePlatform";
 
 export interface GameSearchParams {
   genre: Genre | null;
   platform: Platform | null;
+  sortOrder: string;
 }
 function App() {
   const [gameSearchParams, setGameSearchParams] = useState<GameSearchParams>(
@@ -38,12 +40,23 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area={"main"}>
-        <PlatformSelector
-          selectedPlatform={gameSearchParams.platform}
-          onSelectPlatfrom={(platform) =>
-            setGameSearchParams({ ...gameSearchParams, platform })
-          }
-        />
+        <Flex marginBottom={3}>
+          <Box mr={5}>
+            <PlatformSelector
+              selectedPlatform={gameSearchParams.platform}
+              onSelectPlatfrom={(platform) =>
+                setGameSearchParams({ ...gameSearchParams, platform })
+              }
+            />
+          </Box>
+
+          <SortSelector
+            sortOrder={gameSearchParams.sortOrder}
+            onSelectSortOrder={(sortOrder) =>
+              setGameSearchParams({ ...gameSearchParams, sortOrder })
+            }
+          />
+        </Flex>
         <GameGrid gameSearchParams={gameSearchParams} />
       </GridItem>
     </Grid>

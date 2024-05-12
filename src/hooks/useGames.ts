@@ -17,6 +17,7 @@ const useGames = (gameSearchParams: GameSearchParams) =>
       params: {
         genres: gameSearchParams.genre?.id,
         parent_platforms: gameSearchParams?.platform?.id,
+        ordering: gameSearchParams.sortOrder,
       },
     },
     [gameSearchParams]
