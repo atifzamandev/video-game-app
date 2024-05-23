@@ -23,12 +23,12 @@ const PlatformSelector = ({
   if (isLoading)
     return (
       <Menu>
-        <Skeleton height='40px' width='122px' ml='1rem' />
+        <Skeleton height='40px' width='122px'/>
       </Menu>
     );
   return (
     <Menu>
-      <MenuButton as={Button} ml='1rem' rightIcon={<FaChevronDown />}>
+      <MenuButton as={Button} rightIcon={<FaChevronDown />}>
         {selectedPlatform?.name || "Platform"}
       </MenuButton>
       <MenuList>

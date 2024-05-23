@@ -18,8 +18,8 @@ const GameGrid = ({ gameSearchParams }: GameGridProps) => {
   return (
     <SimpleGrid
       columns={{ sm: 1, md: 2, lg: 3, xl: 4, "2xl": 5 }}
-      padding='1rem'
-      spacing={3}
+      padding={4}
+      spacing={6}
     >
       {isLoading &&
         skeletons.map((skeleton) => (
