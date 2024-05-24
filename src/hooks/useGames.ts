@@ -8,6 +8,7 @@ export interface Game {
   background_image: string;
   parent_platforms: { platform: Platform }[];
   metacritic: number;
+  rating_top: number;
 }
 
 const useGames = (gameSearchParams: GameSearchParams) =>
@@ -18,7 +19,7 @@ const useGames = (gameSearchParams: GameSearchParams) =>
         genres: gameSearchParams.genre?.id,
         parent_platforms: gameSearchParams?.platform?.id,
         ordering: gameSearchParams.sortOrder,
-        search: gameSearchParams.searchText
+        search: gameSearchParams.searchText,
       },
     },
     [gameSearchParams]
