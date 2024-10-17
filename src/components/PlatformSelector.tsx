@@ -1,10 +1,10 @@
 import {
-    Button,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuList,
-    Skeleton,
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Skeleton,
 } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 import usePlatform, { Platform } from "../hooks/usePlatform";
@@ -23,7 +23,7 @@ const PlatformSelector = ({
   if (isLoading)
     return (
       <Menu>
-        <Skeleton height='40px' width='122px'/>
+        <Skeleton height="40px" width="122px" />
       </Menu>
     );
   return (
@@ -32,7 +32,7 @@ const PlatformSelector = ({
         {selectedPlatform?.name || "Platform"}
       </MenuButton>
       <MenuList>
-        {data.map((platform) => (
+        {data?.results.map((platform) => (
           <MenuItem
             onClick={() => onSelectPlatfrom(platform)}
             key={platform.id}
