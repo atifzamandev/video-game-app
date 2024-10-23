@@ -15,7 +15,7 @@ const useGenres = () => {
     queryKey: ["genres"],
     queryFn: apiClient.getAll,
     staleTime: Infinity,
-    initialData: { count: genres.length, results: genres },
+    initialData: genres,
     refetchOnMount: false,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,

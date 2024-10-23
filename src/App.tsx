@@ -6,12 +6,10 @@ import GenreList from "./components/GenreList";
 import NavBar from "./components/NavBar";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
-import { Genre } from "./hooks/useGenres";
-import { Platform } from "./hooks/usePlatform";
 
 export interface GameSearchParams {
-  genre: Genre | null;
-  platform: Platform | null;
+  genreId?: number;
+  platformId?: number;
   sortOrder: string;
   searchText: string;
 }
@@ -38,9 +36,9 @@ function App() {
       <Show above="lg">
         <GridItem area={"aside"} paddingX="0.5rem">
           <GenreList
-            selectedGenre={gameSearchParams.genre}
+            selectedGenreId={gameSearchParams.genreId}
             onSelectGenre={(genre) =>
-              setGameSearchParams({ ...gameSearchParams, genre })
+              setGameSearchParams({ ...gameSearchParams, genreId: genre.id })
             }
           />
         </GridItem>
@@ -51,9 +49,9 @@ function App() {
           <Flex marginBottom={3}>
             <Box mr={5}>
               <PlatformSelector
-                selectedPlatform={gameSearchParams.platform}
+                selectedPlatformId={gameSearchParams.platformId}
                 onSelectPlatfrom={(platform) =>
-                  setGameSearchParams({ ...gameSearchParams, platform })
+                  setGameSearchParams({ ...gameSearchParams, platformId: platform.id })
                 }
               />
             </Box>

@@ -7,17 +7,21 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
-import usePlatform, { Platform } from "../hooks/usePlatform";
+import usePlatforms, { Platform } from "../hooks/usePlatforms";
+import usePlatform from "../hooks/usePlatform";
 
 interface PlatformSelectorProps {
   onSelectPlatfrom: (platform: Platform) => void;
-  selectedPlatform: Platform | null;
+  selectedPlatformId?: number;
 }
 const PlatformSelector = ({
   onSelectPlatfrom,
-  selectedPlatform,
+  selectedPlatformId,
 }: PlatformSelectorProps) => {
-  const { data, isLoading, error } = usePlatform();
+  const { data: selectedPlatforms, isLoading, error } = usePlatforms();
+
+  //const selectedPlatform = selectedPlatforms.results.find(platform=>platform.id === selectedPlatformId)
+  const selectedPlatform = usePlatform(selectedPlatformId);
 
   if (error) return null;
   if (isLoading)
@@ -32,7 +36,7 @@ const PlatformSelector = ({
         {selectedPlatform?.name || "Platform"}
       </MenuButton>
       <MenuList>
-        {data?.results.map((platform) => (
+        {selectedPlatforms?.results.map((platform) => (
           <MenuItem
             onClick={() => onSelectPlatfrom(platform)}
             key={platform.id}
