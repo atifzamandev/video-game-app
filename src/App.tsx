@@ -1,5 +1,4 @@
 import { Box, Flex, Grid, GridItem, Show } from "@chakra-ui/react";
-import { useState } from "react";
 import GameGrid from "./components/GameGrid";
 import GameHeading from "./components/GameHeading";
 import GenreList from "./components/GenreList";
@@ -7,16 +6,10 @@ import NavBar from "./components/NavBar";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
 
-export interface GameSearchParams {
-  genreId?: number;
-  platformId?: number;
-  sortOrder: string;
-  searchText: string;
-}
 function App() {
-  const [gameSearchParams, setGameSearchParams] = useState<GameSearchParams>(
-    {} as GameSearchParams
-  );
+  // const [gameSearchParams, setGameSearchParams] = useState<GameSearchParams>(
+  //   {} as GameSearchParams
+  // );
 
   return (
     <Grid
@@ -27,43 +20,24 @@ function App() {
       templateColumns={{ base: "1fr", lg: "200px 1fr" }}
     >
       <GridItem area={"nav"}>
-        <NavBar
-          onSearch={(searchText) =>
-            setGameSearchParams({ ...gameSearchParams, searchText })
-          }
-        />
+        <NavBar />
       </GridItem>
       <Show above="lg">
         <GridItem area={"aside"} paddingX="0.5rem">
-          <GenreList
-            selectedGenreId={gameSearchParams.genreId}
-            onSelectGenre={(genre) =>
-              setGameSearchParams({ ...gameSearchParams, genreId: genre.id })
-            }
-          />
+          <GenreList />
         </GridItem>
       </Show>
       <GridItem area={"main"}>
         <Box paddingLeft={4}>
-          <GameHeading gameSearchParams={gameSearchParams} />
+          <GameHeading />
           <Flex marginBottom={3}>
             <Box mr={5}>
-              <PlatformSelector
-                selectedPlatformId={gameSearchParams.platformId}
-                onSelectPlatfrom={(platform) =>
-                  setGameSearchParams({ ...gameSearchParams, platformId: platform.id })
-                }
-              />
+              <PlatformSelector />
             </Box>
-            <SortSelector
-              sortOrder={gameSearchParams.sortOrder}
-              onSelectSortOrder={(sortOrder) =>
-                setGameSearchParams({ ...gameSearchParams, sortOrder })
-              }
-            />
+            <SortSelector />
           </Flex>
         </Box>
-        <GameGrid gameSearchParams={gameSearchParams} />
+        <GameGrid />
       </GridItem>
     </Grid>
   );

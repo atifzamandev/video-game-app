@@ -7,19 +7,18 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
-import usePlatforms, { Platform } from "../hooks/usePlatforms";
 import usePlatform from "../hooks/usePlatform";
+import usePlatforms from "../hooks/usePlatforms";
+import useSearchQueryParams from "../store";
 
-interface PlatformSelectorProps {
-  onSelectPlatfrom: (platform: Platform) => void;
-  selectedPlatformId?: number;
-}
-const PlatformSelector = ({
-  onSelectPlatfrom,
-  selectedPlatformId,
-}: PlatformSelectorProps) => {
+const PlatformSelector = () => {
   const { data: selectedPlatforms, isLoading, error } = usePlatforms();
-
+  const selectedPlatformId = useSearchQueryParams(
+    (state) => state.gameQuery.platformId
+  );
+  const setSelectedPlatformId = useSearchQueryParams(
+    (state) => state.setPlatfromId
+  );
   //const selectedPlatform = selectedPlatforms.results.find(platform=>platform.id === selectedPlatformId)
   const selectedPlatform = usePlatform(selectedPlatformId);
 
@@ -38,7 +37,7 @@ const PlatformSelector = ({
       <MenuList>
         {selectedPlatforms?.results.map((platform) => (
           <MenuItem
-            onClick={() => onSelectPlatfrom(platform)}
+            onClick={() => setSelectedPlatformId(platform.id)}
             key={platform.id}
           >
             {platform.name}

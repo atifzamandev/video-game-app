@@ -1,16 +1,16 @@
 import { Heading } from "@chakra-ui/react";
-import { GameSearchParams } from "../App";
 import useGenre from "../hooks/useGenre";
 import usePlatform from "../hooks/usePlatform";
+import useSearchQueryParams from "../store";
 
-interface Props {
-  gameSearchParams: GameSearchParams;
-}
+const GameHeading = () => {
+  const genreId = useSearchQueryParams((state) => state.gameQuery.genreId);
+  const genre = useGenre(genreId);
 
-const GameHeading = ({ gameSearchParams }: Props) => {
-  const genre = useGenre(gameSearchParams.genreId);
-
-  const platform = usePlatform(gameSearchParams.platformId);
+  const platformId = useSearchQueryParams(
+    (state) => state.gameQuery.platformId
+  );
+  const platform = usePlatform(platformId);
 
   const heading = `${platform?.name || ""} ${genre?.name || ""} Games`;
   return (
