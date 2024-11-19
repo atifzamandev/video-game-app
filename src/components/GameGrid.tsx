@@ -1,22 +1,23 @@
-import { SimpleGrid, Spinner, Text } from "@chakra-ui/react";
-import React from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import useGames, { Game } from "../hooks/useGames";
-import GameCard from "./GameCard";
-import GameCardContainer from "./GameCardContainer";
-import GameCardSkeleton from "./GameCardSkeleton";
+import { SimpleGrid, Spinner, Text } from '@chakra-ui/react'
+import React from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import useGames from '../hooks/useGames'
+import { Game } from '../types/Game'
+import GameCard from './GameCard'
+import GameCardContainer from './GameCardContainer'
+import GameCardSkeleton from './GameCardSkeleton'
 
 const GameGrid = () => {
-  const { data, error, isLoading, fetchNextPage, hasNextPage } = useGames();
+  const { data, error, isLoading, fetchNextPage, hasNextPage } = useGames()
 
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
-  if (error) return <Text>{error.message}</Text>;
+  if (error) return <Text>{error.message}</Text>
 
   const fetchedGamesCount = data?.pages.reduce(
     (total, page) => total + page.results.length,
     0
-  );
+  )
 
   return (
     // <Box>
@@ -27,7 +28,7 @@ const GameGrid = () => {
       loader={<Spinner />}
     >
       <SimpleGrid
-        columns={{ sm: 1, md: 2, lg: 3, xl: 4, "2xl": 5 }}
+        columns={{ sm: 1, md: 2, lg: 3, xl: 4, '2xl': 5 }}
         padding={4}
         spacing={6}
       >
@@ -55,7 +56,7 @@ const GameGrid = () => {
       </Button> *
 
     /* </Box> */
-  );
-};
+  )
+}
 
-export default GameGrid;
+export default GameGrid
